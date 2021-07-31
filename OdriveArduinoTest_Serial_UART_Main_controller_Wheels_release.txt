@@ -1,0 +1,61 @@
+
+/*
+HardwareSerial& serial_1 = Serial5;
+HardwareSerial& serial_2 = Serial6;
+HardwareSerial& serial_3 = Serial7;
+HardwareSerial& serial_4 = Serial8;
+*/
+
+void setup() {
+  Serial.begin(115200);
+  Serial5.begin(115200);
+  Serial6.begin(115200);
+  Serial7.begin(115200);
+  Serial8.begin(115200);
+}
+
+void loop() {
+  // read from port 0, send to port 1:
+  //if (Serial.available()) {
+   // Serial1.write("s");
+    //Serial1.print(inByte, DEC);
+
+  //}
+
+
+
+/*
+    // read from port 1, send to port 5:
+  if (Serial.available()) {
+    int inByte = Serial.read();
+    Serial5.write(inByte);
+    Serial.println(inByte, DEC);
+
+  }
+
+
+
+    // read from port 1, send to port 6:
+  if (Serial.available()) {
+    int inByte = Serial.read();
+    Serial6.print(inByte);
+  }
+
+
+*/
+
+
+    // read from port 1, send to port 7:
+  if (Serial7.available()) {
+    //int inByte = serial_3.read();
+    Serial7.write(2);
+
+  }
+
+  
+  // read from port 1, send to port 8:
+  if (Serial8.available()) {
+    //int inByte = Serial.read();
+    Serial8.write(2);
+  }
+}

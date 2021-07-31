@@ -1,0 +1,85 @@
+// includes
+#include <HardwareSerial.h>
+#include <SoftwareSerial.h>
+#include <ODriveArduino.h>
+// Printing with stream operator helper functions
+template<class T> inline Print& operator <<(Print &obj,     T arg) { obj.print(arg);    return obj; }
+template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(arg, 4); return obj; }
+
+
+////////////////////////////////
+// Set up serial pins to the ODrive
+////////////////////////////////
+
+// Below are some sample configurations.
+// You can comment out the default Teensy one and uncomment the one you wish to use.
+// You can of course use something different if you like
+// Don't forget to also connect ODrive GND to Arduino GND.
+
+// Teensy 3 and 4 (all versions) - Serial1
+// pin 0: RX - connect to ODrive TX pin 1: - (yellow wire)
+// pin 1: TX - connect to ODrive RX pin 2: - (white wire)
+// See https://www.pjrc.com/teensy/td_uart.html for other options on Teensy
+//HardwareSerial& odrive_serial = Serial1;
+
+HardwareSerial& odrive_serial = Serial3;
+
+// Arduino Mega or Due - Serial1
+// pin 19: RX - connect to ODrive TX
+// pin 18: TX - connect to ODrive RX
+// See https://www.arduino.cc/reference/en/language/functions/communication/serial/ for other options
+// HardwareSerial& odrive_serial = Serial1;
+
+// Arduino without spare serial ports (such as Arduino UNO) have to use software serial.
+// Note that this is implemented poorly and can lead to wrong data sent or read.
+// pin 8: RX - connect to ODrive TX
+// pin 9: TX - connect to ODrive RX
+// SoftwareSerial odrive_serial(8, 9);
+
+
+// ODrive object
+ODriveArduino odrive(odrive_serial);
+
+void setup() {
+  // ODrive uses 115200 baud
+  odrive_serial.begin(115200);
+
+  // Serial to PC
+  Serial.begin(115200);
+  Serial2.begin(115200);
+
+  Serial.println("Ready!");
+  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
+  Serial.println("Send the character 's' to exectue test move");
+  Serial.println("Send the character 'b' to read bus voltage");
+  Serial.println("Send the character 'p' to read motor positions in a 10s loop");
+  Serial.println(Serial2.read());
+}
+
+void loop() {
+  int Speed = Serial2.read();
+
+    // Sinusoidal test move
+
+    //if (c == 's') {
+      Serial.println("Executing test move");
+
+       int pos_m0 = - Speed;
+       int pos_m1 = Speed;
+      
+      //for (float ph = 0.0f; ph < 6.28318530718f; ph += 0.01f) {
+        //float pos_m0 = 2.0f * cos(ph);
+        //float pos_m1 = 2.0f * sin(ph);
+        //odrive.SetPosition(0, pos_m0);
+        //odrive.SetPosition(1, pos_m1);
+
+        //odrive.SetPosition(0, pos_m0);
+        //odrive.SetPosition(1, pos_m1);
+        
+       odrive.SetVelocity(0, pos_m0);
+       odrive.SetVelocity(1, pos_m0);
+       odrive.SetVelocity(2, pos_m0);
+       odrive.SetVelocity(3, pos_m0);
+       delay(1000);
+
+}
