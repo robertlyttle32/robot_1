@@ -5,6 +5,8 @@ HardwareSerial& serial_2 = Serial6;
 HardwareSerial& serial_3 = Serial7;
 HardwareSerial& serial_4 = Serial8;
 */
+ 
+int steering_val = 10;
 
 void setup() {
   Serial.begin(115200);
@@ -39,23 +41,41 @@ void loop() {
   if (Serial.available()) {
     int inByte = Serial.read();
     Serial6.print(inByte);
+    
   }
 
 
 */
+//Steering
+//if (Serial6.available()) {
+    Serial6.write(10);
+    delay(2000);
+    Serial6.write(-10);
+//}
 
+//if (Serial7.available()){
+    delay(2000);
+    Serial5.write(1);
+    delay(2000);
+    Serial5.write(1);
+//}
 
+    //Right Wheels
     // read from port 1, send to port 7:
-  if (Serial7.available()) {
+//  if (Serial7.available()) {
     //int inByte = serial_3.read();
     Serial7.write(2);
 
-  }
+ // }
 
-  
+  //Left Wheels
   // read from port 1, send to port 8:
-  if (Serial8.available()) {
+//  if (Serial8.available()) {
     //int inByte = Serial.read();
     Serial8.write(2);
-  }
+ // }
+ delay(5000);
+ Serial7.write(-2);
+ Serial8.write(-2);
+    
 }
