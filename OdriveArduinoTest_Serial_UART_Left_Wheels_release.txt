@@ -45,24 +45,25 @@ void setup() {
   odrive_serial.begin(115200);
 
   // Serial to PC
-  Serial.begin(115200);
+  //Serial.begin(115200);
   Serial2.begin(115200);
 
-  Serial.println("Ready!");
-  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
-  Serial.println("Send the character 's' to exectue test move");
-  Serial.println("Send the character 'b' to read bus voltage");
-  Serial.println("Send the character 'p' to read motor positions in a 10s loop");
-  Serial.println(Serial2.read());
+//  Serial.println("Ready!");
+//  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
+//  Serial.println("Send the character 's' to exectue test move");
+//  Serial.println("Send the character 'b' to read bus voltage");
+//  Serial.println("Send the character 'p' to read motor positions in a 10s loop");
+//  Serial.println(Serial2.read());
 }
 
 void loop() {
+  //if(Serial2.available()){
   int Speed = Serial2.read();
 
     // Sinusoidal test move
 
     //if (c == 's') {
-      Serial.println("Executing test move");
+      //Serial.println("Executing test move");
 
        int pos_m0 = - Speed;
        int pos_m1 = Speed;
@@ -81,5 +82,5 @@ void loop() {
        odrive.SetVelocity(2, pos_m0);
        odrive.SetVelocity(3, pos_m0);
        delay(1000);
-
+  //}
 }
