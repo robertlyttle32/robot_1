@@ -23,6 +23,7 @@ template<>        inline Print& operator <<(Print &obj, float arg) { obj.print(a
 //HardwareSerial& odrive_serial = Serial1;
 
 HardwareSerial& odrive_serial = Serial3;
+HardwareSerial& serial_2 = Serial2;
 
 // Arduino Mega or Due - Serial1
 // pin 19: RX - connect to ODrive TX
@@ -46,7 +47,7 @@ void setup() {
 
   // Serial to PC
   //Serial.begin(115200);
-  Serial2.begin(115200);
+  serial_2.begin(115200);
 
 //  Serial.println("Ready!");
 //  Serial.println("Send the character '0' or '1' to calibrate respective motor (you must do this before you can command movement)");
@@ -58,7 +59,7 @@ void setup() {
 
 void loop() {
   //if(Serial2.available()){
-  int Speed = Serial2.read();
+  int Speed = serial_2.read();
 
     // Sinusoidal test move
 
@@ -79,8 +80,6 @@ void loop() {
         
        odrive.SetVelocity(0, pos_m0);
        odrive.SetVelocity(1, pos_m0);
-       odrive.SetVelocity(2, pos_m0);
-       odrive.SetVelocity(3, pos_m0);
-       delay(1000);
+       delay(100);
   //}
 }
